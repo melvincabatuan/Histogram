@@ -12,7 +12,7 @@ using namespace cv;
 
 
 
-
+/// Real-time 12-20 fps
 void calculateHistogram(const Mat &Image, Mat &histoImage)
 {
 	int histSize = 255;
@@ -84,6 +84,17 @@ JNIEXPORT void JNICALL Java_com_cabatuan_histogram_MainActivity_process
        srcBGR = Mat(bitmapInfo.height, bitmapInfo.width, CV_8UC3);
     
     cvtColor(src, srcBGR, CV_YUV420sp2RGB);
+    
+    /*
+    std::vector<Mat> channels;
+	split( srcBGR, channels);
+	
+	equalizeHist(channels[0], channels[0]);
+	equalizeHist(channels[1], channels[1]);
+	equalizeHist(channels[2], channels[2]);
+	*/
+	
+	// merge( channels, equalized );
     
     if(histogramImg.empty())
        histogramImg = Mat(bitmapInfo.height, bitmapInfo.width, CV_8UC3);
